@@ -1,15 +1,17 @@
+//TO DO:
+// - Implement requests validations;
+// - For now, the CRUD is pretty simple, as the application grow, it will be refined;
+
 const express = require('express');
 const router = express.Router();
 const Post = require('../app/models/post');
 
 router.get('/', async(req, res) => {
 
-    const { limit } = req.query;
-    const { offset } = req.query;
-
     try {
 
         const posts = await Post.find();
+
         res.json(posts);
 
     } catch (error) {

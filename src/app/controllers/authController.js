@@ -152,7 +152,7 @@ router.post('/reset_password', async(req, res) => {
 
     try {
 
-        const user = User.findOne({ email })
+        const user = await User.findOne({ email })
             .select('+passwordResetToken passwordResetExpires');
 
         if (!user) {
@@ -160,7 +160,7 @@ router.post('/reset_password', async(req, res) => {
             return res.json({ error: 'User not found' });
         }
 
-        if (token !== user.passwordResetToken) {
+        if (token != user.passwordResetToken) {
             res.status(400);
             return res.json({ error: 'Informed token does not match with the user password reset token.' });
         }
